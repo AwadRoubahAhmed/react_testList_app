@@ -11,6 +11,8 @@ export default function TestContents() {
     { id: 4, name: "Abricot" },
   ]);
 
+  const [nouveauFruit, setNouveauFruit] = useState("");
+
   // Comportements
   const handleDelete = (id, name) => {
     console.log("Deleted", id, name);
@@ -31,7 +33,11 @@ export default function TestContents() {
     console.log("handleSubmit!", e);
   };
 
-  //Code JSX;;
+  const handleChange = (event) => {
+    setNouveauFruit(event.target.value);
+  };
+
+  //Code JSX;
   // Affichage (render)
   return (
     <div>
@@ -64,6 +70,7 @@ export default function TestContents() {
           className="border rounded-md px-4 py-2 my-3 flex-1 capitalize"
           type="text"
           placeholder="Ajouter des fruits..."
+          onChange={handleChange}
         />
         <button
           className="border rounded-md px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-white cursor-pointer font-semibold"
@@ -75,3 +82,5 @@ export default function TestContents() {
     </div>
   );
 }
+
+// Sychonisation Descendante/ ascendante;
