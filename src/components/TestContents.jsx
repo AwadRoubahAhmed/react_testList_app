@@ -11,6 +11,7 @@ export default function TestContents() {
     { id: 4, name: "Abricot" },
   ]);
 
+  // Nouveau fruit à ajouter
   const [nouveauFruit, setNouveauFruit] = useState("");
 
   // Comportements
@@ -82,5 +83,3 @@ export default function TestContents() {
     </div>
   );
 }
-
-// Sychonisation Descendante/ ascendante;
