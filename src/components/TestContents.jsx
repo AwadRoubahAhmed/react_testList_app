@@ -31,7 +31,19 @@ export default function TestContents() {
   /*3-Soumission du formulaire*/
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("handleSubmit!", e);
+    //console.log("handleSubmit!", e);
+
+    // Copie du state
+    const fruitsCopy = [...fruits];
+
+    //Manipuler la copie du state
+    const id = new Date().getTime();
+    const name = nouveauFruit;
+    fruitsCopy.push({ id, name });
+
+    // Modifier mon state avec le setter dedié
+    setFruits(fruitsCopy);
+    setNouveauFruit("");
   };
 
   const handleChange = (event) => {
@@ -49,7 +61,7 @@ export default function TestContents() {
         <ul className="list-none pl-4 mx-4 text-lg">
           {fruits.map((fruit) => (
             <li className="flex items-center justify-around" key={fruit.id}>
-              {fruit.id}. {fruit.name}
+              {fruit.name}
               <button
                 onClick={() => handleDelete(fruit.id, fruit.name)}
                 className="bg-zinc-800 hover:bg-zinc-700 text-white text-xs rounded-full p-1"
