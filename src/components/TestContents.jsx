@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Fruit from "./fruit";
 
 export default function TestContents() {
   //Code JavaScript;
@@ -15,8 +16,8 @@ export default function TestContents() {
   const [nouveauFruit, setNouveauFruit] = useState("");
 
   // Comportements
-  const handleDelete = (id, name) => {
-    console.log("Deleted", id, name);
+  const handleDelete = (id) => {
+    console.log("Deleted", id);
 
     // Copie du state
     const fruitsCopy = [...fruits];
@@ -39,7 +40,8 @@ export default function TestContents() {
     //Manipuler la copie du state
     const id = new Date().getTime();
     const name = nouveauFruit;
-    fruitsCopy.push({ id, name });
+    const fruitAjouter = { id, name };
+    fruitsCopy.push(fruitAjouter);
 
     // Modifier mon state avec le setter dedié
     setFruits(fruitsCopy);
@@ -60,15 +62,7 @@ export default function TestContents() {
       <div className="bg-slate-500 text-center">
         <ul className="list-none pl-4 mx-4 text-lg">
           {fruits.map((fruit) => (
-            <li className="flex items-center justify-around" key={fruit.id}>
-              {fruit.name}
-              <button
-                onClick={() => handleDelete(fruit.id, fruit.name)}
-                className="bg-zinc-800 hover:bg-zinc-700 text-white text-xs rounded-full p-1"
-              >
-                X
-              </button>
-            </li>
+            <Fruit fruitInfo={fruit} onFruitDelete={handleDelete} />
           ))}
         </ul>
       </div>
