@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Fruit from "./fruit";
+import FruitForm from "./FruitForm";
 
 export default function TestContents() {
   //Code JavaScript;
@@ -11,9 +12,6 @@ export default function TestContents() {
     { id: 3, name: "Banana" },
     { id: 4, name: "Abricot" },
   ]);
-
-  // Nouveau fruit à ajouter
-  const [nouveauFruit, setNouveauFruit] = useState("");
 
   // Comportements
   const handleDelete = (id) => {
@@ -29,31 +27,19 @@ export default function TestContents() {
     setFruits(fruitsCopyUpdated);
   };
 
-  /*3-Soumission du formulaire*/
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    //console.log("handleSubmit!", e);
-
-    // Copie du state
+  const handleAdd = (fruitAAjouter) => {
+    //1. Copie du State
     const fruitsCopy = [...fruits];
 
-    //Manipuler la copie du state
-    const id = new Date().getTime();
-    const name = nouveauFruit;
-    const fruitAjouter = { id, name };
+    //2. Manipuler mon State
     fruitsCopy.push(fruitAjouter);
 
-    // Modifier mon state avec le setter dedié
+    //3. Mofifier mon State avec le setter dédié
     setFruits(fruitsCopy);
-    setNouveauFruit("");
   };
 
-  const handleChange = (event) => {
-    setNouveauFruit(event.target.value);
-  };
-
-  //Code JSX;
   // Affichage (render)
+  //Code JSX;
   return (
     <div>
       <h3 className="text-xl text-center font-bold underline my-4 mx-6">
@@ -62,30 +48,16 @@ export default function TestContents() {
       <div className="bg-slate-500 text-center">
         <ul className="list-none pl-4 mx-4 text-lg">
           {fruits.map((fruit) => (
-            <Fruit fruitInfo={fruit} onFruitDelete={handleDelete} />
+            <Fruit
+              fruitInfo={fruit}
+              onFruitDelete={handleDelete}
+              key={fruit.id}
+            />
           ))}
         </ul>
       </div>
 
-      {/*1-Gestion du formulaire*/}
-      {/*2-Création du formulaire*/}
-      <form action="submit" onSubmit={handleSubmit}>
-        <h3 className="text-xl text-center font-bold underline my-6 mx-6">
-          Champs d'ajouts des fruits !
-        </h3>
-        <input
-          className="border rounded-md px-4 py-2 my-3 flex-1 capitalize"
-          type="text"
-          placeholder="Ajouter des fruits..."
-          onChange={handleChange}
-        />
-        <button
-          className="border rounded-md px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-white cursor-pointer font-semibold"
-          type="submit"
-        >
-          Ajouter
-        </button>
-      </form>
+      <FruitForm handleAdd={handleAdd} />
     </div>
   );
 }
