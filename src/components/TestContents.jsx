@@ -38,6 +38,10 @@ export default function TestContents() {
     setFruits(fruitsCopy);
   };
 
+  const afficherFruitPrefere = (fruitLike) => {
+    alert(`I like this one : ${fruitLike}.`);
+  };
+
   // Affichage (render)
   //Code JSX;
   return (
@@ -50,7 +54,7 @@ export default function TestContents() {
           {fruits.map((fruit) => (
             <Fruit
               fruitInfo={fruit}
-              onFruitDelete={handleDelete}
+              onClick={() => afficherFruitPrefere(fruit.name)}
               key={fruit.id}
             />
           ))}
